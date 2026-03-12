@@ -81,7 +81,7 @@ export default function OverviewPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {reposLoading || prsLoading
           ? Array.from({ length: 4 }).map((_, i) => <StatCardSkeleton key={i} />)
           : [
@@ -128,8 +128,8 @@ export default function OverviewPage() {
             ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5">
           <h2 className="text-sm font-semibold text-zinc-900 dark:text-white mb-4">PR Activity (last 8 weeks)</h2>
           {prsLoading ? (
             <div className="h-40 flex items-center justify-center">

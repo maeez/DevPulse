@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, GitPullRequest, BookMarked, Activity, LogOut, Sun, Moon, Zap } from 'lucide-react'
+import { LayoutDashboard, GitPullRequest, BookMarked, Activity, LogOut, Sun, Moon, Zap, X } from 'lucide-react'
 import { useAuthStore } from '../../store/authStore'
 import { useThemeStore } from '../../store/themeStore'
 import { cn } from '../../services/utils'
@@ -11,7 +11,7 @@ const navItems = [
   { to: '/pull-requests', icon: GitPullRequest, label: 'Pull Requests' },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }: { onClose?: () => void }) {
   const { user, logout } = useAuthStore()
   const { theme, toggleTheme } = useThemeStore()
   const navigate = useNavigate()
@@ -22,14 +22,19 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="w-60 shrink-0 h-screen sticky top-0 flex flex-col bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800">
-      <div className="px-5 py-5 border-b border-zinc-200 dark:border-zinc-800">
+    <aside className="w-60 h-screen flex flex-col bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800">
+      <div className="px-5 py-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center">
             <Zap size={14} className="text-white" />
           </div>
           <span className="font-bold text-zinc-900 dark:text-white tracking-tight text-lg">DevPulse</span>
         </div>
+        {onClose && (
+          <button onClick={onClose} className="lg:hidden p-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-white">
+            <X size={16} />
+          </button>
+        )}
       </div>
 
       <div className="px-3 py-4 border-b border-zinc-200 dark:border-zinc-800">
@@ -54,6 +59,7 @@ export default function Sidebar() {
             key={to}
             to={to}
             end={to === '/'}
+            onClick={onClose}
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all',
