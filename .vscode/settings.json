@@ -1,0 +1,10 @@
+{
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.experimental.configFile": null,
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**"
+  ]
+}
