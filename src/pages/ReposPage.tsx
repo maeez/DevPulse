@@ -3,7 +3,7 @@ import { useRepos } from '../hooks/useGitHub'
 import { useFilterStore } from '../store/filterStore'
 import { RepoCardSkeleton } from '../components/ui/Skeleton'
 import { formatRelativeTime, getLanguageColor, isStale } from '../services/utils'
-import { Star, GitFork, AlertCircle, ExternalLink, Search, AlertTriangle } from 'lucide-react'
+import { Star, GitFork, AlertCircle, ExternalLink, Search, AlertTriangle, Lock } from 'lucide-react'
 import type { Repo } from '../types/github'
 
 export default function ReposPage() {
@@ -122,22 +122,30 @@ function RepoCard({ repo }: { repo: Repo }) {
   return (
     <div className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 flex flex-col gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
       <div className="flex items-start justify-between gap-2">
-        <a
-          href={repo.html_url}
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5 min-w-0"
-        >
-          <span className="truncate">{repo.name}</span>
-          <ExternalLink size={11} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-        </a>
-              {stale && (
-                    <span title="Stale repo">
-                      <AlertTriangle size={13} className="text-amber-500 shrink-0" />
-                    </span>
-              )}
-      </div>
-
+      {repo.private ? (
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="text-sm font-semibold text-zinc-900 dark:text-white truncate">{repo.name}</span>
+          <span className="shrink-0 flex items-center gap-1 text-xs px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+            <Lock size={10} />
+            Private
+          </span>
+    </div>
+  ) : (
+     <a  href={repo.html_url}
+      target="_blank"
+      rel="noreferrer"
+      className="text-sm font-semibold text-zinc-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5 min-w-0">
+     
+      <span className="truncate">{repo.name}</span>
+      <ExternalLink size={11} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+    </a>
+  )}
+  {stale && (
+    <span title="Stale repo">
+      <AlertTriangle size={13} className="text-amber-500 shrink-0" />
+    </span>
+  )}
+</div>
       {repo.description && (
         <p className="text-xs text-zinc-500 line-clamp-2 leading-relaxed">{repo.description}</p>
       )}
