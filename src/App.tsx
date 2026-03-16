@@ -8,6 +8,7 @@ import OverviewPage from './pages/OverviewPage'
 import ReposPage from './pages/ReposPage'
 import ActivityPage from './pages/ActivityPage'
 import PullRequestsPage from './pages/PullRequestsPage'
+import NotFoundPage from './pages/NotFoundPage'   
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,7 @@ export default function App() {
             <Route path="repos" element={<ReposPage />} />
             <Route path="activity" element={<ActivityPage />} />
             <Route path="pull-requests" element={<PullRequestsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
