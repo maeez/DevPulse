@@ -14,6 +14,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const { setToken: saveToken, setUser } = useAuthStore()
 
+  const btnText = token === DEMO_TOKEN ? "Guest Login" : "Connect to GitHub" 
+
   const handleSubmit = async () => {
     if (!token.trim()) return
     setLoading(true)
@@ -67,7 +69,7 @@ export default function LoginPage() {
               disabled={loading || !token.trim()}
               className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold py-3 rounded-lg transition-colors"
             >
-              {loading ? 'Verifying...' : 'Connect to GitHub'}
+              {loading ? 'Verifying...' : btnText}
             </button>
           </div>
 
