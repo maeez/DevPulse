@@ -78,7 +78,7 @@ export default function LoginPage() {
               Required token scopes:
             </p>
             <div className="flex gap-2 mb-4">
-              {['repo', 'read:user', 'read:org'].map((scope) => (
+              {['repo', 'read:user'].map((scope) => (
                 <span
                   key={scope}
                   className="bg-zinc-800 text-zinc-300 text-xs px-2.5 py-1 rounded-md border border-zinc-700 font-mono"
